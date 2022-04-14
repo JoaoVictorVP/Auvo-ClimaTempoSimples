@@ -16,7 +16,7 @@ namespace Auvo.ClimaTempoSimples
             Cidade = new HashSet<Cidade>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]

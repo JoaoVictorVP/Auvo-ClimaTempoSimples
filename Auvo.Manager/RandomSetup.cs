@@ -2,6 +2,7 @@
 using Auvo.ClimaTempoSimples.Core;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 public class RandomSetup
 {
@@ -58,7 +59,12 @@ public class RandomSetup
 
         frc.DataPrevisao = curDay;
         frc.Clima = clima;
-        frc.TemperaturaMinima = rand.Next(TempMin, TempMax);
+
+        int tempA = rand.Next(TempMin, TempMax);
+        int tempB = rand.Next(TempMin, TempMax);
+
+        frc.TemperaturaMinima = Math.Min(tempA, tempB);
+        frc.TemperaturaMaxima = Math.Max(tempA, tempB);
 
         curDay.AddDays(1);
 
@@ -72,7 +78,7 @@ public class RandomSetup
         int parts = rand.Next(2, 5);
         for (int i = 0; i < parts; i++)
             name += cityNameParts[rand.Next(0, cityNameParts.Length)];
-        return name;
+        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name);
     }
 
     public RandomSetup()

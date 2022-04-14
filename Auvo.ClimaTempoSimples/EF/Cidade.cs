@@ -16,7 +16,7 @@ namespace Auvo.ClimaTempoSimples
             PrevisaoClima = new HashSet<PrevisaoClima>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]

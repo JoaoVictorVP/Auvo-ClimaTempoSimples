@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace Auvo.ClimaTempoSimples
 {
-    public static class Service<TInterface> where TInterface : IDependency
+    public class Service<TInterface> : IService where TInterface : IDependency
     {
         static Type resolver;
         public static IDependency Singleton { get; private set; }
@@ -35,46 +34,30 @@ namespace Auvo.ClimaTempoSimples
 
             resolver = type;
         }
-    }
-    public interface IDependency
-    {
-        void OnCreate();
-    }
-    public interface IUnboundCollection<T> : ICollection<T>
-    {
-    }
-    public struct UnboundCollection<T, TFrom> : IUnboundCollection<T> where TFrom : T
-    {
-        ICollection<TFrom> collection;
 
-        public int Count => collection.Count;
+        object IService.CreateInstance() => Create();
 
-        public bool IsReadOnly => collection.IsReadOnly;
+        object IService.GetSingleton() => Singleton;
 
-        public void Add(T item) => collection.Add((TFrom)item);
-        public void Clear() => collection.Clear();
-        public bool Contains(T item) => collection.Contains((TFrom)item);
-        public void CopyTo(T[] array, int arrayIndex)
+        void IService.SetResolver(Type type) => resolver = type;
+
+        void IService.SetSingleton(object singleton)
         {
-            int i = arrayIndex;
-            foreach (var item in collection)
-            {
-                array[i] = item;
-                i++;
-            }
+            if (!(singleton is TInterface))
+                throw new Exception($"Need a compatible object singleton with <{typeof(TInterface).Name}>");
+            Singleton = (TInterface)singleton;
         }
+    }
+    public static class Service
+    {
+        static Dictionary<Type, Type> cached = new Dictionary<Type, Type>(32);
 
-        public IEnumerator<T> GetEnumerator()
+        public static IService For(Type forInterface)
         {
-            foreach (var item in collection)
-                yield return item;
-        }
-        public bool Remove(T item) => collection.Remove((TFrom)item);
-        IEnumerator IEnumerable.GetEnumerator() => collection.GetEnumerator();
+            if (cached.TryGetValue(forInterface, out Type serviceType) is false)
+                cached[forInterface] = serviceType = typeof(Service<>).MakeGenericType(forInterface);
 
-        public UnboundCollection(ICollection<TFrom> collection)
-        {
-            this.collection = collection;
+            return (IService)Activator.CreateInstance(serviceType);
         }
     }
 }

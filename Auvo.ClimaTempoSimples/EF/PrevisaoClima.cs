@@ -12,7 +12,7 @@ namespace Auvo.ClimaTempoSimples
     [Table("PrevisaoClima")]
     public partial class PrevisaoClima : IPrevisaoClima
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]

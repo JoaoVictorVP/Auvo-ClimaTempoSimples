@@ -12,5 +12,9 @@ namespace Auvo.ClimaTempoSimples.Controllers
         {
             return View();
         }
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }

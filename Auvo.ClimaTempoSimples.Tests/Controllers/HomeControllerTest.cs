@@ -13,7 +13,7 @@ namespace Auvo.ClimaTempoSimples.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
-        [TestInitialize]
+        [ClassInitialize]
         public void Setup()
         {
             Service<IClimaTempoCompleto>.UseResolver<ClimaTempoContext>();
