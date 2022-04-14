@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32317.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auvo.ClimaTempoSimples", "Auvo.ClimaTempoSimples\Auvo.ClimaTempoSimples.csproj", "{4F452C20-D7D1-4C9D-8FF1-840270A9336D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auvo.ClimaTempoSimples.Tests", "Auvo.ClimaTempoSimples.Tests\Auvo.ClimaTempoSimples.Tests.csproj", "{E6695A37-2913-494E-959C-9948E6C8FDF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F452C20-D7D1-4C9D-8FF1-840270A9336D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F452C20-D7D1-4C9D-8FF1-840270A9336D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F452C20-D7D1-4C9D-8FF1-840270A9336D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F452C20-D7D1-4C9D-8FF1-840270A9336D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6695A37-2913-494E-959C-9948E6C8FDF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6695A37-2913-494E-959C-9948E6C8FDF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6695A37-2913-494E-959C-9948E6C8FDF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6695A37-2913-494E-959C-9948E6C8FDF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53C5A581-5C2B-4C31-9EC2-96031582939F}
+	EndGlobalSection
+EndGlobal
