@@ -27,6 +27,14 @@ namespace Auvo.ClimaTempoSimples
         {
             resolver = typeof(T);
         }
+
+        public static void UseResolver(Type type)
+        {
+            if (type.GetInterface(typeof(TInterface).Name) == null)
+                throw new NotImplementedException($"Cannot detect any instance of {typeof(TInterface).Name} on this type");
+
+            resolver = type;
+        }
     }
     public interface IDependency
     {

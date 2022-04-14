@@ -31,5 +31,9 @@ namespace Auvo.ClimaTempoSimples
         public virtual ICollection<PrevisaoClima> PrevisaoClima { get; set; }
 
         IEstado ICidade.Estado { get => Estado; set => Estado = (Estado)value; }
+
+        IUnboundCollection<IPrevisaoClima> ICidade.PrevisaoClima => new UnboundCollection<IPrevisaoClima, PrevisaoClima>(PrevisaoClima);
+
+        void IDependency.OnCreate() { }
     }
 }

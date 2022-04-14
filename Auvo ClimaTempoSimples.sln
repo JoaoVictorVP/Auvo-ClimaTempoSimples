@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auvo.ClimaTempoSimples", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auvo.ClimaTempoSimples.Tests", "Auvo.ClimaTempoSimples.Tests\Auvo.ClimaTempoSimples.Tests.csproj", "{E6695A37-2913-494E-959C-9948E6C8FDF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auvo.Manager", "Auvo.Manager\Auvo.Manager.csproj", "{27913224-0703-43C9-B3E8-07BAE8997400}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E6695A37-2913-494E-959C-9948E6C8FDF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6695A37-2913-494E-959C-9948E6C8FDF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6695A37-2913-494E-959C-9948E6C8FDF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27913224-0703-43C9-B3E8-07BAE8997400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27913224-0703-43C9-B3E8-07BAE8997400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27913224-0703-43C9-B3E8-07BAE8997400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27913224-0703-43C9-B3E8-07BAE8997400}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

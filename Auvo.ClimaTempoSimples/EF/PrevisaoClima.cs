@@ -7,6 +7,8 @@ namespace Auvo.ClimaTempoSimples
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    using EClima = ClimaTempoSimples.Core.Clima;
+
     [Table("PrevisaoClima")]
     public partial class PrevisaoClima : IPrevisaoClima
     {
@@ -26,5 +28,49 @@ namespace Auvo.ClimaTempoSimples
         public int CidadeId { get; set; }
 
         public virtual Cidade Cidade { get; set; }
+
+        EClima IPrevisaoClima.Clima { 
+            get
+            {
+                switch(Clima)
+                {
+                    case nameof(EClima.Ensolarado):
+                        return EClima.Ensolarado;
+
+                    case nameof(EClima.Nublado):
+                        return EClima.Nublado;
+
+                    case nameof(EClima.Tempestuoso):
+                        return EClima.Tempestuoso;
+
+                    default:
+                        return EClima.Undefined;
+                }
+            }
+            set
+            {
+                switch (value)
+                {
+                    case EClima.Ensolarado:
+                        Clima = nameof(EClima.Ensolarado);
+                        break;
+
+                    case EClima.Nublado:
+                        Clima = nameof(EClima.Nublado);
+                        break;
+
+                    case EClima.Tempestuoso:
+                        Clima = nameof(EClima.Tempestuoso);
+                        break;
+
+                    default:
+                        Clima = nameof(EClima.Undefined);
+                        break;
+                }
+            }
+        }
+        ICidade IPrevisaoClima.Cidade { get => Cidade; set => Cidade = (Cidade)value; }
+
+        void IDependency.OnCreate() { }
     }
 }

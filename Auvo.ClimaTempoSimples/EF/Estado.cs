@@ -31,5 +31,7 @@ namespace Auvo.ClimaTempoSimples
         public virtual ICollection<Cidade> Cidade { get; set; }
 
         IUnboundCollection<ICidade> IEstado.Cidades => new UnboundCollection<ICidade, Cidade>(Cidade);
+
+        void IDependency.OnCreate() { }
     }
 }

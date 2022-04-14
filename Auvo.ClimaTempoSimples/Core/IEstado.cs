@@ -2,7 +2,7 @@
 
 namespace Auvo.ClimaTempoSimples.Core
 {
-    public interface IEstado
+    public interface IEstado : IDependency
     {
         int Id { get; set; }
         string Nome { get; set; }
