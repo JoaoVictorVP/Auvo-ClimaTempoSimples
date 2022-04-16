@@ -12,8 +12,8 @@ Projeto para teste de trabalho
   - Adicionar dados aleatórios para consumo (como não foi específicado se o nome das cidades/dados climáticos deveria ser real, a implantação é feita com dados aleatórios)
  * Executar o site em localhost
 
- * Em caso de erros, execute o seguinte comando no gerenciador de pacotes:
-  Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
+ * Em caso de erros, execute o seguinte comando no gerenciador de pacotes:<br />
+  Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r<br/>
   Isso se deve a um bug não do projeto em si mas do package referenciado pelo ASP.NET DotnetCompilerPlatform, esse comando irá reinstalar o pacote e resolver possíveis problemas com a dependência
 
 Feito isso, o projeto deverá estar funcional e utilizável para avaliação.
