@@ -68,7 +68,7 @@ namespace Auvo.Manager
         {
             WriteLine("Inserindo dados aleatórios no banco de dados para consulta...\n");
 
-            var rand = new RandomSetup();
+            var rand = new RandomData();
 
             using (var ctx = Service<IClimaTempoCompleto>.Create())
             {

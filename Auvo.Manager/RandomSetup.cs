@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-public class RandomSetup
+public class RandomData
 {
     public int TempMin { get; set; } = 13;
     public int TempMax { get; set; } = 33;
@@ -80,7 +80,7 @@ public class RandomSetup
         return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name);
     }
 
-    public RandomSetup()
+    public RandomData()
     {
         rand = new Random();
     }
