@@ -1,4 +1,94 @@
-﻿@{
-    ViewBag.Title = "Clima";
+﻿@model Auvo.ClimaTempoSimples.Core.IClimaTempoCompleto
+@{
+	ViewBag.Title = "Clima";
+
+	const string PrevisaoClimaView = "Core/IPrevisaoClima.cshtml";
+
+	var today = DateTime.Now;
+	today = new DateTime(today.Year, today.Month, today.Day);
+
+	//Func<Auvo.ClimaTempoSimples.Core.IPrevisaoClima, bool> forecastPredicate = forecast => forecast.DataPrevisao.DayOfYear == today.DayOfYear && forecast.DataPrevisao.Year == today.Year;
+
+	var hottest = Model.QueryPrevisaoClima().Where(forecast => forecast.DataPrevisao == today).OrderByDescending(forecast => forecast.TemperaturaMaxima).ThenByDescending(forecast => forecast.TemperaturaMinima).Take(3);
+
+	var coldest = Model.QueryPrevisaoClima().Where(forecast => forecast.DataPrevisao == today).OrderBy(forecast => forecast.TemperaturaMaxima).ThenBy(forecast => forecast.TemperaturaMinima).Take(3);
+
+	var states = Model.QueryEstado();
 }
 
+<div class="panel container">
+    <h1 class="row">Clima Tempo Simples</h1>
+
+    <div class="row">
+        <div class="col-sm-5 my-panel">
+            <div class="my-panel-title bg-primary"><h4>Cidades mais quentes hoje</h4></div>
+            <p class="my-panel-content">
+					@foreach (var forecast in hottest)
+					{
+						var city = forecast.Cidade;
+						<div class="row" style="margin-left: 3px">
+							<span class="col-sm-6">@city.Nome/@city.Estado.UF</span>
+							<span class="col-sm-3">Min @string.Concat(forecast.TemperaturaMinima, "ºC")</span>
+							<span class="col-sm-3">Máx @string.Concat(forecast.TemperaturaMaxima, "ºC")</span>
+						</div>
+					}
+                
+            </p>
+        </div>
+        <div class="col-sm-5 my-panel">
+            <div class="my-panel-title bg-primary"><h4>Cidades mais frias hoje</h4></div>
+			<p class="my-panel-content">
+				@foreach (var forecast in coldest)
+				{
+					var city = forecast.Cidade;
+					<div class="row" style="margin-left: 3px">
+						<span class="col-sm-6">@city.Nome/@city.Estado.UF</span>
+						<span class="col-sm-3">Min @string.Concat(forecast.TemperaturaMinima, "ºC")</span>
+						<span class="col-sm-3">Máx @string.Concat(forecast.TemperaturaMaxima, "ºC")</span>
+					</div>
+				}
+			</p>
+        </div>
+
+		<div class="row col-sm-12">
+			<p style="margin-bottom: 0px; margin-top: 10px; font-weight: bold">Cidade:</p>
+			<select id="city-select" class="sl2" style="width: 30%">
+				<option></option>
+				@foreach (var state in states)
+				{
+					<optgroup label="@state.Nome - @state.UF">
+						@foreach (var city in state.Cidades)
+						{
+							<option value="@city.Id">@city.Nome</option>
+						}
+					</optgroup>
+				}
+			</select>
+		</div>
+
+		<div id="city-forecast" class="row col-sm-12"></div>
+    </div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$('.sl2').select2({
+			placeholder: "Selecione uma cidade..."
+		});
+		$('#city-select').on('select2:select', function (e) {
+			var data = e.params.data;
+			var cityId = data.id;
+			$.ajax({
+				url: "@Url.Action("ListForecastForCity", "Home")",
+				type: "GET",
+				data: { id: cityId },
+				success: function (res) {
+					$('#city-forecast').html(res);
+				},
+				error: function (hata) {
+					$('#city-forecast').html("Erro ao carregar dados climáticos para " + data.text + "of" + JSON.stringify(hata));
+				}
+			});
+		});
+	});
+</script>

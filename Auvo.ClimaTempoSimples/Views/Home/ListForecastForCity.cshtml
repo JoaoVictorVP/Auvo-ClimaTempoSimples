@@ -1,0 +1,20 @@
+﻿@model Auvo.ClimaTempoSimples.Core.ICidade
+@{
+	Layout = null;
+	var today = DateTime.Now;
+	today = new DateTime(today.Year, today.Month, today.Day);
+}
+
+<html>
+<body>
+	<h3>Clima para os próximos 7 dias na cidade de @Model.Nome</h3>
+	<div class="container">
+		<div class="row">
+			@foreach (var forecast in Model.PrevisaoClima.Where(f => f.DataPrevisao >= today).OrderBy(f => f.DataPrevisao).Take(7))
+			{
+				@RenderPage("Core/IPrevisaoClima.cshtml", forecast)
+			}
+		</div>
+	</div>
+</body>
+</html>

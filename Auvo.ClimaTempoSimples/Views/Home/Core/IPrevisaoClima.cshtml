@@ -1,0 +1,37 @@
+﻿@using System.Globalization
+@using Auvo.ClimaTempoSimples.Core
+@{
+	CultureInfo ptBr = new CultureInfo("pt-BR");
+
+	int size = 24;
+	IPrevisaoClima Model = Page[0];
+}
+
+<div class="col-xs-1 my-panel" style="min-width: 160px; max-width: 15%; margin: 3px">
+	<div class="my-panel-title bg-primary"><h4>@Model.DataPrevisao.ToString("dddd", ptBr)</h4></div>
+	<p class="my-panel-content text-center" style="margin-top: 10px">
+		@switch (Model.Clima)
+		{
+			case Clima.Ensolarado:
+				<img src="~/Content/Icons/sun.svg" width="@size" height="@size" />;
+				break;
+			case Clima.Nublado:
+				<img src="~/Content/Icons/clouds.svg" width="@size" height="@size" />;
+				break;
+			case Clima.Chuvoso:
+				<img src="~/Content/Icons/cloud-rain.svg" width="@size" height="@size" />;
+				break;
+			case Clima.Tempestuoso:
+				<img src="~/Content/Icons/cloud-lightning-rain-fill.svg" width="@size" height="@size" />;
+				break;
+
+			default:
+				<img src="~/Content/Icons/x-circle.svg" width="@size" height="@size" />;
+				break;
+		} @Model.Clima
+		<br />
+		Minima: @string.Concat(Model.TemperaturaMinima, "ºC")
+		<br />
+		Maxima: @string.Concat(Model.TemperaturaMaxima, "ºC")
+	</p>
+</div>

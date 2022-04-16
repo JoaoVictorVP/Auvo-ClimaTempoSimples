@@ -70,9 +70,10 @@ namespace Auvo.ClimaTempoSimples
         void IClimaTempoComEstados.AddEstados(IEnumerable<IEstado> estados) => Estado.AddRange(estados.Cast<Estado>());
         void IClimaTempoComPrevisaoClima.AddPrevisaoClima(IPrevisaoClima previsaoClima) => PrevisaoClima.Add((PrevisaoClima)previsaoClima);
         void IClimaTempoComPrevisaoClima.AddPrevisaoClimas(IEnumerable<IPrevisaoClima> previsaoClimas) => PrevisaoClima.AddRange(previsaoClimas.Cast<PrevisaoClima>());
-        IQueryable<ICidade> IClimaTempoComCidades.QueryCidade() => Cidade;
-        IQueryable<IEstado> IClimaTempoComEstados.QueryEstado() => Estado;
-        IQueryable<IPrevisaoClima> IClimaTempoComPrevisaoClima.QueryPrevisaoClima() => PrevisaoClima;
+
+        IQueryable<ICidade> IClimaTempoComCidades.QueryCidade() => Cidade.AsQueryable();
+        IQueryable<IEstado> IClimaTempoComEstados.QueryEstado() => Estado.AsQueryable();
+        IQueryable<IPrevisaoClima> IClimaTempoComPrevisaoClima.QueryPrevisaoClima() => PrevisaoClima.AsQueryable();
 
         void IClimaTempoComCidades.RemoveCidade(ICidade cidade) => Cidade.Remove((Cidade)cidade);
         void IClimaTempoComCidades.RemoveCidades(IEnumerable<ICidade> cidades) => Cidade.RemoveRange(cidades.Cast<Cidade>());

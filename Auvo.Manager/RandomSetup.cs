@@ -10,7 +10,6 @@ public class RandomSetup
     public int TempMax { get; set; } = 33;
 
     Random rand;
-    DateTime curDay;
 
     public List<(string nome, string uf)> States = new List<(string, string)> { ("Minas Gerais", "MG"), ("São Paulo", "SP"), ("Rio de Janeiro", "RJ") };
     public IEnumerable<IEstado> RandomStates()
@@ -37,18 +36,20 @@ public class RandomSetup
         var city = Service<ICidade>.Create();
         city.Nome = RandomCityName(rand);
 
-        int forecastCount = rand.Next(10, 30);
+        int forecastCount = rand.Next(10, 70);
 
+        var date = DateTime.Now;
         for(int i = 0; i < forecastCount; i++)
         {
-            var forecast = RandomForecast();
+            var forecast = RandomForecast(date);
             city.PrevisaoClima.Add(forecast);
+            date = date.AddDays(1);
         }
 
         return city;
     }
 
-    public IPrevisaoClima RandomForecast()
+    public IPrevisaoClima RandomForecast(DateTime date)
     {
         var frc = Service<IPrevisaoClima>.Create();
 
@@ -57,7 +58,7 @@ public class RandomSetup
 
         Clima clima = (Clima)rand.Next(climaMin, climaMax + 1);
 
-        frc.DataPrevisao = curDay;
+        frc.DataPrevisao = date;
         frc.Clima = clima;
 
         int tempA = rand.Next(TempMin, TempMax);
@@ -65,8 +66,6 @@ public class RandomSetup
 
         frc.TemperaturaMinima = Math.Min(tempA, tempB);
         frc.TemperaturaMaxima = Math.Max(tempA, tempB);
-
-        curDay.AddDays(1);
 
         return frc;
     }
@@ -84,6 +83,5 @@ public class RandomSetup
     public RandomSetup()
     {
         rand = new Random();
-        curDay = DateTime.Now;
     }
 }

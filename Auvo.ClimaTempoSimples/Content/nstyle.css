@@ -1,8 +1,25 @@
-﻿.centerp {
-    position: absolute;
-    
-    left: 50%;
-    top: 50%;
+﻿:root {
+    --primary-color: #337ab7;
+}
 
-    transform: translate(-50%, -50%);
+.my-panel {
+    display: block;
+    background-color: #f3f3f3;
+    margin-right: 35px;
+
+    border-width: 1px;
+    border-color: var(--primary-color);
+    border-style: solid;
+
+    padding: 0px;
+}
+
+.my-panel-title {
+    min-height: 30px;
+    padding: 3px 3px 3px 10px;
+    width: 100%;
+}
+
+.my-panel-content {
+    margin-left: 7px;
 }

@@ -23,6 +23,7 @@ namespace Auvo.ClimaTempoSimples
 
         public decimal TemperaturaMaxima { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime DataPrevisao { get; set; }
 
         public int CidadeId { get; set; }
@@ -32,41 +33,13 @@ namespace Auvo.ClimaTempoSimples
         EClima IPrevisaoClima.Clima { 
             get
             {
-                switch(Clima)
-                {
-                    case nameof(EClima.Ensolarado):
-                        return EClima.Ensolarado;
-
-                    case nameof(EClima.Nublado):
-                        return EClima.Nublado;
-
-                    case nameof(EClima.Tempestuoso):
-                        return EClima.Tempestuoso;
-
-                    default:
-                        return EClima.Undefined;
-                }
+                if (Enum.TryParse(Clima, out EClima clima))
+                    return clima;
+                return EClima.Undefined;
             }
             set
             {
-                switch (value)
-                {
-                    case EClima.Ensolarado:
-                        Clima = nameof(EClima.Ensolarado);
-                        break;
-
-                    case EClima.Nublado:
-                        Clima = nameof(EClima.Nublado);
-                        break;
-
-                    case EClima.Tempestuoso:
-                        Clima = nameof(EClima.Tempestuoso);
-                        break;
-
-                    default:
-                        Clima = nameof(EClima.Undefined);
-                        break;
-                }
+                Clima = value.ToString();
             }
         }
         ICidade IPrevisaoClima.Cidade { get => Cidade; set => Cidade = (Cidade)value; }

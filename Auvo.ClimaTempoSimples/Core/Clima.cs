@@ -6,6 +6,7 @@
 
         Ensolarado,
         Nublado,
+        Chuvoso,
         Tempestuoso
     }
 }
